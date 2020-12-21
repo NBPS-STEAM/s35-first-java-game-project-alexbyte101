@@ -1,6 +1,7 @@
 
 import java.util.Scanner;
 
+
 public class App {
   Scanner myScanner = new Scanner(System.in);
 	Scanner enterScanner = new Scanner(System.in);
@@ -38,20 +39,31 @@ public class App {
 		System.out.println("Please enter your name:");
 		
 		playerName = myScanner.nextLine();
+    	System.out.println("\n------------------------------------------------------------------\n");
 		
-		System.out.println("Hello " + playerName + ", you are one of the Dungeon's most aclaimed and beloved thieves.\n You hold masteries in many arenas -- \nIdentity Theft \n Social Enginnering \n Manipulation \nIllusion");	
-    System.out.println("This season, the Lord of Thieves has chosen you to complete a strenuous mission: Anaconda.");
-    System.out.println("1. Next");
+		System.out.println("Hello " + playerName + ", \nyou are one of the Dungeon's most aclaimed and beloved \nthieves.\nYou hold masteries in many arenas -- \nIdentity Theft \nSocial Enginnering \nManipulation \nIllusion");
+    	System.out.println("\n------------------------------------------------------------------\n");
+		
+    System.out.println("This season, the Lord of Thieves has chosen you to complete a \nstrenuous mission: Anaconda.");
+    System.out.println("Press 1 to continue ");
     int first_choice = myScanner.nextInt();
     if(first_choice == 1){
-      System.out.println("Anaconda is known to be an impossible mission only legendary masterminds can complete.\n You'll have to enter the Shorendia Castle with the identity of someone else, and ransack all the values you can find in the time period...");
-      System.out.println("The reason why this mission is difficult is because the guards will not let you in unless you have all of the elements they desire.");
-      System.out.println("You pack some random belongigs to seem like an innocent traveller, and head to the main entrance of the KingDom");
+      
+      System.out.println("Anaconda is known to be an impossible mission only legendary \nmasterminds can complete it.\nYou'll have to enter the Shorendia Castle with the identity \nof someone else,and ransack all the values you can find \nin the time period...");
+      System.out.println("The reason why this mission is difficult is because the guards\n will not let you in the Castle unless\n you have all of the elements they desire.");
+      System.out.println("You pack some random belongings to seem like an innocent traveller, \nand head to the main entrance of the KingDom");
+      System.out.println("To start your mission press 1");
+      first_choice = myScanner.nextInt();
+      while(first_choice != 1){
+        System.out.println("To start your mission press 1");
+        first_choice = myScanner.nextInt();
+      }
+      
     }else {
       	System.out.println("\n------------------------------------------------------------------\n");
       System.out.println("You were supposed to type in 1 \n ANYWAYS");
 
-      System.out.println("Anaconda is known to be an impossible mission only legendary masterminds can complete.\n You'll have to enter the Shorendia Castle with the identity of someone else, and ransack all the values you can find in the time period...");
+      System.out.println("Anaconda is known to be an impossible mission only legendary masterminds can complete.\n You'll have to enter the Shorendia Castle with the identity of someone else, \nand ransack all the values you can find in the time period...");
       System.out.println("The reason why this mission is difficult is because the guards will not let you in unless you have all of the elements they desire.");
       System.out.println("You pack some random belongigs to seem like an innocent traveller, and head to the main entrance of the KingDom");
     }
@@ -74,14 +86,15 @@ public class App {
 
 		choice = myScanner.nextInt();
 		
+
 		if(choice==1){
-			if(silverRing==1 && spiritbook ==1 && sacredvenom &&  crystalhoop==1 && frozensunlight ==1){
+			if(silverRing==1 && crystalhoop==1){
 				ending();
 			}
 			else{
 				System.out.println("Guard: Hello there, stranger. So your name is " + playerName + '?');
         System.out.println("You: Yes, I'm a goods trader from the Southern Tribe");
-				System.out.println("Guard: We cannot let you in yet, as you dont contain the items of purity and verification. \n These include: \n The Sacred Venom \n The Crystal Loop \n The Spirit Book \n The Frozen Sunlight \n and The Silver Ring");
+				System.out.println("Guard: We cannot let you in yet, as you dont contain the items of purity \nand verification. \n These include: \n The Sacred Venom \n The Crystal Loop \n The Spirit Book \n The Frozen Sunlight \n and The Silver Ring");
         System.out.println("Guard: Take the crossroad on the right and start searching there");
         crossRoad();
 
@@ -105,11 +118,12 @@ public class App {
 	
 	public void crossRoad(){
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("You are at the crossroad. If you go south, you will go back to the castle's entrance.\n\n");
-		System.out.println("1: Go north");
-		System.out.println("2: Go east");
-		System.out.println("3: Go south");
-		System.out.println("4: Go west");
+		System.out.println("You do not have all the items the guards desire, yet.\n You are at the crossroad. \n You can return to the castle's entrance, by hitting 5\n ");
+    System.out.println("1: Go north, to Wizard Kyoshi's place");
+		System.out.println("2: Go east, to the Cobra's Temple");
+		System.out.println("3: Go south, to the underground Library");
+		System.out.println("4: Go west, to the Enchanted Forest");
+    System.out.println("5. Go back to the castle's entrance");
 		System.out.println("\n------------------------------------------------------------------\n");
 		
 		choice = myScanner.nextInt();
@@ -126,15 +140,47 @@ public class App {
 		else if(choice==4){
 			west();
 		}
+    else if(choice == 5){
+      townGate();
+    }
 		else{
 			crossRoad();
 		}
 	}
 	
 	public void north(){
+    Scanner input = new Scanner(System.in);
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("There is a river. You drink the water and rest at the riverside.");
-		System.out.println("Your HP is recovered.");
+    if(frozensunlight == 0);{
+
+    
+    // You meet Kyoshi
+		System.out.println("You knock on the door, but there is no response.");
+    System.out.println("You start to head back, but hear the door open behind you.");
+     
+    System.out.println("'How can I help you?', you hear Kyoshi ask.");
+    System.out.println("You: I'm looking for some kind of jar with sunlight? ");
+    System.out.println("Kyoshi: Ah, yes! You mean this?\n He steps aside, to reveal a stunning and intricate jar\n that glowed bright in the room." );
+    
+    //Next 
+    System.out.println("1. Next");
+    choice = input.nextInt();
+    if(choice ==1 ){
+      System.out.println("You run to it with your arms wide, but trip over a tight rope \n underneath your feet.");
+    System.out.println("Kyoshi: Yeah, not so fast. To recieve this jar, you'll have to \ncomplete on my most challenging mazes!");
+
+      // You enter the maze
+    System.out.println("Suddenly, the ground underneath n\you starts to shake, and you fall into a \n endless-looking maze.");
+
+    }else {
+    System.out.println("You run to it with your arms wide, but trip over a tight rope underneath your feet.");
+    System.out.println("Kyoshi: Yeah, not so fast. To recieve this jar, you'll have to complete on my most challenging mazes!");
+
+      
+    System.out.println("Suddenly, the ground underneath you starts to shake, and you fall into a endless-looking maze.");
+    Hangman();
+    }
+   
 		playerHP = playerHP + 1;
 		System.out.println("Your HP: " + playerHP);
 		System.out.println("\n\n1: Go back to the crossroad");
@@ -149,7 +195,7 @@ public class App {
 			north();
 		}
 	}
-	
+  }
 	public void east(){
 		System.out.println("\n------------------------------------------------------------------\n");
 		System.out.println("You walked into a forest and found a Long Sword!");
