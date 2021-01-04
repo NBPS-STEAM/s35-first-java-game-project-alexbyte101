@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Hangman{
   public Hangman(){
-   
+  }
    
   
     System.out.println("***WELCOME TO HANGMAN****");
-  
+    
   
     //The dictionary
     ArrayList<String> words = new ArrayList<>();
@@ -20,6 +20,7 @@ public class Hangman{
 
     Scanner textScanner = new Scanner(words);
     Scanner input = new Scanner(System.in);
+  
 
     String hidden_text = words.get((int)(Math.random() * words.size()));
     char[] textArray = hidden_text.toCharArray();
@@ -78,7 +79,7 @@ public class Hangman{
     
  }
 
-  }
+  
   
 
   public static void drawHangman(int l) {

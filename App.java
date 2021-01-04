@@ -170,7 +170,8 @@ public class App {
     System.out.println("Kyoshi: Yeah, not so fast. To recieve this jar, you'll have to \ncomplete on my most challenging mazes!");
 
       // You enter the maze
-    System.out.println("Suddenly, the ground underneath n\you starts to shake, and you fall into a \n endless-looking maze.");
+    System.out.println("Suddenly, the ground underneath \nyou starts to shake, and you fall into a \n endless-looking maze.");
+    Hangman();
 
     }else {
     System.out.println("You run to it with your arms wide, but trip over a tight rope underneath your feet.");
@@ -196,6 +197,9 @@ public class App {
 		}
 	}
   }
+
+
+
 	public void east(){
 		System.out.println("\n------------------------------------------------------------------\n");
 		System.out.println("You walked into a forest and found a Long Sword!");
@@ -214,83 +218,120 @@ public class App {
 		}
 	}
 	
+
+
+
+
 	public void west(){
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("You encounter a goblin!\n");
-		System.out.println("1: Fight");
-		System.out.println("2: Run");
-		System.out.println("\n------------------------------------------------------------------\n");
-		
-		choice = myScanner.nextInt();
-		
-		if(choice==1){
-			fight();
-		}
-		else if(choice==2){
-			crossRoad();
-		}
-		else{
-			west();
-		}
+	  Scanner in = new Scanner();
+    Random rand = new Random(); // rand num generator for enemies.
+
+    //enemy variables
+    String[] enemies = { "Monster", "Goblin", "Assassin"};
+    int maxHealthE = 80;
+    int AttackfromEnemy = 25;
+
+    //user variables
+    int health = 90;
+    int damageFromAttack = 50;
+    int healthPotions = 2;
+    int potionsHealing = 20;
+    int potionsFromEnemies = 40; // There is a 40 percent chance for the enemy to drop a healing potion
+
+    boolean running = true;
+    FIGHT:
+    while(running) {
+          System.out.println("\n------------------------------------------------------------------\n");
+          int enemyHealth = rand.nextInt(maxHealthE); // rand num from 0 to 80;
+          String enemy = enemies[rand.nextInt(enemies.length)]; // selects rand enemy from array
+          System.out.println("\t# A " + enemy + "has appeared!! #\n");
+
+          while(enemyHealth > 0) {
+            System.out.println("\tYour HP: " +health);
+            System.out.println("\t" + enemy + "'s HP: " + enemyHealth);
+            System.out.println("\nWhat are you gonna do?");
+            System.out.println("\t1. Attack");
+            System.out.println("\t2. Drink health potion");
+            System.out.println("\t3.Run");
+
+            String input = in.nextLine();
+            if(input.equals("1")) {//CHOICE 1
+              int damageDealt = rand.nextInt(damageFromAttack);// rand num from 0 to 50 for damage to enemy
+              int damageTaken = rand.nextInt(AttackfromEnemy); //rand num from 0 to 25 for damage to player
+
+                enemyHealth -= damageDealt; //enemy health
+                health -= damageTaken; // user health
+
+                System.out.println("\t>You strike the " + enemy + "for" + damageDealt + " damage.");
+                System.out.println("\t You recieve" + damageTaken + " in retaliation");
+                if(health <= 0) {
+                  System.out.println("\t> You have taken too much damage. You are to weak to go on!");
+                  break;
+                }
+
+            }else if(input.equals("2")){ // CHOICE 2
+                    if(healthPotions > 0){
+                      health += potionsHealing;
+                      healthpotions--;
+                      System.out.println("You drink a health potion, healing yourself for "+ potionsHealing + ".\n\t> You now have" + health + " HP."
+                      + "\n\t> You have " + healthPotions + "left.\n");
+                    }else {
+                        System.out.println("\t> You have no health potions left \n Defeat enemies for a chance to earn one");
+                    }
+                    
+            }else if(input.equals("3")){ // CHOICE 3
+                     System.out.println("\t You run away from the" + enemy + "!");
+                     continue FIGHT;
+            }else{
+              System.out.println("\tInvalid Command!");
+
+            }
+          }
+
+              
+            if(health <1) {
+              System.out.println("You limp out in the forest, unable to get obtain the SilverRing ");
+              break;
+            }
+                  System.out.println("\n------------------------------------------------------------------\n");
+                  System.out.println(" # " + enemy + " was defeated! # ");
+                  System.out.println("You obtained the silver Ring");
+            if(rand.nextInt(100) < potionsFromEnemies) {
+              healthPotions++;
+              System.out.println(" # The " + enemy + " dropped a health potion! # ");
+              System.out.println(" # You now have " + healthPotions + " health potion(s) left");
+            }
+
+            // 2ND CHOICE OPTIONS (AFTER 1ST FIGHT)
+            System.out.println("\n------------------------------------------------------------------\n");
+            System.out.println("What would you like to do now?");
+            System.out.println("1. Continue Fighting to obtain the Silver Ring, if you havent yet obtained it");
+            System.out.println("2. Go back to the crossroad");
+            String input = nextLine();
+            while(!input.equals("1") && !input.equals("2")) {
+              System.out.println("Invalid command!");
+              input = in.nextLine();
+            }
+
+            if(input.equals("1")) { //option 1
+              System.out.println("You continue fighting!");
+            }else if ( input.equals("2")) {
+              System.out.println("You return to the cross road");
+              break;
+              crossRoad();
+            }
+ 
+    }
+    
+
+
 	}
+
+
+
 	
-	public void fight(){
-		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("Your HP: "+ playerHP);
-		System.out.println("Monster HP: " + monsterHP);
-		System.out.println("\n1: Attack");
-		System.out.println("2: Run");
-		System.out.println("\n------------------------------------------------------------------\n");
-		
-		choice = myScanner.nextInt();
-		
-		if(choice==1){
-			attack();
-		}
-		else if(choice==2){
-			crossRoad();
-		}
-		else{
-			fight();
-		}
-	}
-	
-	public void attack(){
-		int playerDamage =0;
-		
-		
-		if(playerWeapon.equals("Knife")){
-			playerDamage = new java.util.Random().nextInt(5); 
-		}
-		else if(playerWeapon.equals("Long Sword")){
-			playerDamage = new java.util.Random().nextInt(8); 
-		}
-		
-		System.out.println("You attacked the monster and gave " + playerDamage + " damage!");
-		
-		monsterHP = monsterHP - playerDamage;
-		
-		System.out.println("Monster HP: " + monsterHP);
-		
-		if(monsterHP<1){ win(); } else if(monsterHP>0){
-			int monsterDamage =0;
-			
-			monsterDamage = new java.util.Random().nextInt(4);
-			
-			System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
-			
-			playerHP = playerHP - monsterDamage;
-			
-			System.out.println("Player HP: " + playerHP);
-			
-			if(playerHP<1){ dead(); } else if(playerHP>0){
-				fight();
-			}
-		}
-		
-		
-	}
-	
+
 	public void dead(){
 		System.out.println("\n------------------------------------------------------------------\n");
 		System.out.println("You are dead!!!");
